@@ -3,6 +3,8 @@ import sys
 
 class Person:
     name = ""
+    self.parent1
+    self.parent2
 
     def __init__(self, name, parent1, parent2):
         self.name = name
