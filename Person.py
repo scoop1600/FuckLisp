@@ -56,10 +56,10 @@ class Person:
             fam = fam
         else:
             if self.get_parent1() is not None:
-                fam += self.get_parent1().get_name() + " "
-                fam += self.get_parent1.ancestors()
+                fam += self.get_parent1().get_name()
+                fam += self.get_parent1().ancestors()
             if self.get_parent2() is not None:
-                fam += self.get_parent2().get_name + " "
+                fam += self.get_parent2().get_name()
                 fam += self.get_parent2().ancestors()
         return fam
 
@@ -121,10 +121,17 @@ while x != 1:
     data = sys.stdin.readline()
     splits = data.split(" ")
     # splits[0] - query, splits[1] - parent1, splits[2] - parent2, (splits[3] - child)
-    print(splits[0] + " " + splits[1] + " " + splits[2] + " " + splits[3])
+
+    #strips the extra new line and white space from the input
+    for i in range(len(splits)):
+        splits[i] = splits[i].strip()
+
     if splits[0] == "E":
         # Event
         if len(splits) == 3:
+
+            # print(splits[0] + " " + splits[1] + " " + splits[2] + "\n")
+            print(splits[0] + " " + splits[1] + " " + splits[2] + "\n")
 
             if splits[1] not in dict:
                 p1 = Person(splits[1], None, None)
@@ -141,6 +148,9 @@ while x != 1:
                 p2 = dict.get(splits[2])
 
         elif len(splits) == 4:
+
+            # print(splits[0] + " " + splits[1] + " " + splits[2] + " " + splits[3] + "\n")
+            print(splits[0] + " " + splits[1] + " " + splits[2] + " " + splits[3] + "\n")
 
             if splits[1] not in dict:
                 p1 = Person(splits[1], None, None)
@@ -171,70 +181,86 @@ while x != 1:
         if splits[2] == "parent":
             child = dict.get(splits[3])
             parent = dict.get(splits[1])
-
-            if child.find_parent(parent) is True:
-                print("X " + parent.get_name() + " parent " + child.get_name())
-                print("Yes")
-            else:
-                print("X " + parent.get_name() + " parent " + child.get_name())
-                print("No")
+            try:
+                if child.find_parent(parent) is True:
+                    print("X " + parent.get_name() + " parent " + child.get_name())
+                    print("Yes")
+                else:
+                    print("X " + parent.get_name() + " parent " + child.get_name())
+                    print("No \n")
+            except:
+                print("No \n")
 
         elif splits[2] == "sibling":
             sib1 = dict.get(splits[3])
-            print(sib1.get_name())
-            sib2 = dict.get(splits[1])  # saying sib2 is string, not the object
-            print(sib2)
+            sib2 = dict.get(splits[1])
+            try:
 
-            if dict.get(splits[1]).find_sibling(dict.get(splits[3])) is True:
-                print("X " + sib2.get_name() + " sibling " + sib1.get_name())
-                print("Yes")
-            else:
-                print("X " + sib2.get_name() + " sibling " + sib1.get_name())
-                print("No")
+                if dict.get(splits[1]).find_sibling(dict.get(splits[3])) is True:
+                    print("X " + sib2.get_name() + " sibling " + sib1.get_name())
+                    print("Yes")
+                else:
+                    print("X " + sib2.get_name() + " sibling " + sib1.get_name())
+                    print("No")
+            except:
+                print("No\n")
 
-        if splits[2] == "half-sibling":
+        elif splits[2] == "half-sibling":
             sib1 = dict.get(splits[3])
             sib2 = dict.get(splits[1])
-
-            if sib1.find_half(sib2) is True:
-                print("X " + sib2.get_name() + " half-sibling " + sib1.get_name() + "\nYes")
-            else:
-                print("X " + sib2.get_name() + " half-sibling " + sib1.get_name() + "\nNo")
+            try:
+                if sib1.find_half(sib2) is True:
+                    print("X " + sib2.get_name() + " half-sibling " + sib1.get_name() + "\nYes")
+                else:
+                    print("X " + sib2.get_name() + " half-sibling " + sib1.get_name() + "\nNo")
+            except:
+                print("No\n")
 
         elif splits[2] == "ancestor":
             person = dict.get(splits[3])
             anc = dict.get(splits[1])
-
-            if person.find_ancestor(anc) is True:
-                print("X " + anc.get_name() + " ancestor " + person.get_name() + "\nYes")
-            else:
-                print("X " + anc.get_name() + " ancestor " + person.get_name() + "\nNo")
+            try:
+                if person.find_ancestor(anc) is True:
+                    print("X " + anc.get_name() + " ancestor " + person.get_name() + "\nYes")
+                else:
+                    print("X " + anc.get_name() + " ancestor " + person.get_name() + "\nNo")
+            except:
+                print("No")
 
         elif splits[2] == "cousin":
             cousin1 = dict.get(splits[3])
             cousin2 = dict.get(splits[1])
 
-            if cousin1.find_cousin(cousin2) is True:
-                print("X " + cousin2.get_name() + " cousin " + cousin1.get_name() + "\nYes")
-            else:
-                print("X " + cousin2.get_name() + " cousin " + cousin1.get_name() + "\nNo")
+            try:
+                if cousin1.find_cousin(cousin2) is True:
+                    print("X " + cousin2.get_name() + " cousin " + cousin1.get_name() + "\nYes")
+                else:
+                    print("X " + cousin2.get_name() + " cousin " + cousin1.get_name() + "\nNo")
+            except:
+                print("No\n")
+
 
         elif splits[2] == "unrelated":
             person1 = dict.get(splits[3])
             person2 = dict.get(splits[1])
-
-            if person1.find_related(person2) is True:
-                print("X " + person2.get_name() + " unrelated " + person1.get_name() + "\nYes")
-            else:
-                print("X " + person2.get_name() + " unrelated " + person1.get_name() + "\nNo")
+            try:
+                if person1.find_related(person2) is True:
+                    print("X " + person2.get_name() + " unrelated " + person1.get_name() + "\nYes")
+                else:
+                    print("X " + person2.get_name() + " unrelated " + person1.get_name() + "\nNo")
+            except:
+                print("No\n")
 
 
     elif splits[0] is "W":
         # WHO questions
         if splits[1] == "parent":
-            child = dict.get(splits[2])
-            result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
-            print("W parent " + splits[2])
-            print(result)
+            try:
+                child = dict.get(splits[2])
+                result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
+                print("W parent " + splits[2])
+                print(result + "\n")
+            except:
+                print("No parents - Root of Tree")
 
 
