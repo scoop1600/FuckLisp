@@ -284,6 +284,7 @@ while x != 1:
 
         elif splits[1] == "half-sibling":
             half = dict.get(splits[2])
+            result = ""
             for p in people:
                 try:
                     if half.find_half(p) is not True:
