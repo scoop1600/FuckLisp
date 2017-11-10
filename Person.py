@@ -54,16 +54,16 @@ class Person:
             fam = fam
         else:
             if self.get_parent1() is not None:
-                fam += self.get_parent1().get_name()
+                fam += self.get_parent1().get_name() + "\n"
                 fam += self.get_parent1().ancestors()
             if self.get_parent2() is not None:
-                fam += self.get_parent2().get_name()
+                fam += self.get_parent2().get_name() + "\n"
                 fam += self.get_parent2().ancestors()
         return fam
 
     def find_ancestor(self, ancestor):
-        a = self.ancestors()
-        if ancestor.get_name() in a:
+        ancs = self.ancestors()
+        if ancestor.get_name() in ancs:
             return True
         else:
             return False
@@ -73,18 +73,20 @@ class Person:
         direct = False
         result = False
 
-        a = self.ancestors
-        b = other.ancestors
+        a = self.ancestors()
+        b = other.ancestors()
 
         for name in a:
             if name in b:
                 common = True
 
-        if other.get_name in a:
+        if other.get_name() in a:
             direct = True
-        elif self.get_name in b:
+
+        elif self.get_name() in b:
             direct = True
-        if common is True & direct is True:
+
+        if common is True and direct is False:
             result = True
         return result
 
@@ -93,16 +95,18 @@ class Person:
         common = False
         direct = False
 
-        a = self.ancestors
-        b = other.ancestors
+        a = self.ancestors()
+        b = other.ancestors()
 
         for name in a:
             if name in b:
                 common = True
-        if other.get_name in a:
+
+        if other.get_name() in a:
             direct = True
-        elif self.get_name in b:
+        elif self.get_name() in b:
             direct = True
+
         if direct is True | common is True | (direct is True & common is True):
             result = True
         return result
@@ -296,16 +300,18 @@ while x != 1:
         elif splits[1] == "cousin":
             cousin = dict.get(splits[2])
             curr = False
+            result = ""
             for p in people:
                 curr = cousin.find_cousin(p)
                 if curr is True and cousin.get_name() != p.get_name():
-                    result += p.get_name() + "\n"
+                    result += p.get_name()
             print("W cousin " + splits[2])
             print(result)
 
         elif splits[1] == "unrelated":
             rel = dict.get(splits[2])
             curr = False
+            result = ""
             for p in people:
                 curr = rel.find_related(p)
                 if curr is False and rel.get_name() != p.get_name():
