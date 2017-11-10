@@ -266,18 +266,24 @@ while x != 1:
             sib = dict.get(splits[2])
             result = ""
             for p in people:
-                if sib.find_sibling(p) is True:
-                    if p.get_name() != sib.get_name():
-                        result += p.get_name() + "\n"
+                try:
+                    if sib.find_sibling(p) is True:
+                        if p.get_name() != sib.get_name():
+                            result += p.get_name() + "\n"
+                except:
+                    result = result
             print("W sibling " + splits[2])
             print(result)
 
         elif splits[1] == "half-sibling":
             half = dict.get(splits[2])
             for p in people:
-                if half.find_half(p) is not True:
-                    if half.get_name() != p.get_name():
-                        result += p.get_name() + "\n"
+                try:
+                    if half.find_half(p) is not True:
+                        if half.get_name() != p.get_name():
+                            result += p.get_name() + "\n"
+                except:
+                    result = result
             print("W half-sibling " + splits[2])
             print(result)
 
