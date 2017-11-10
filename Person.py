@@ -1,6 +1,4 @@
 import sys
-
-
 class Person:
     name = ""
 
@@ -63,8 +61,6 @@ class Person:
                 fam += self.get_parent2().ancestors()
         return fam
 
-    # may be missing return statement
-
     def find_ancestor(self, ancestor):
         a = self.ancestors()
         if ancestor.get_name() in a:
@@ -121,17 +117,13 @@ while x != 1:
     data = sys.stdin.readline()
     splits = data.split(" ")
     # splits[0] - query, splits[1] - parent1, splits[2] - parent2, (splits[3] - child)
-
-    #strips the extra new line and white space from the input
     for i in range(len(splits)):
         splits[i] = splits[i].strip()
 
     if splits[0] == "E":
         # Event
         if len(splits) == 3:
-
-            # print(splits[0] + " " + splits[1] + " " + splits[2] + "\n")
-            print(splits[0] + " " + splits[1] + " " + splits[2] + "\n")
+            print(splits[0] + " " + splits[1] + " " + splits[2])
 
             if splits[1] not in dict:
                 p1 = Person(splits[1], None, None)
@@ -147,10 +139,8 @@ while x != 1:
             else:
                 p2 = dict.get(splits[2])
 
-        elif len(splits) == 4:
-
-            # print(splits[0] + " " + splits[1] + " " + splits[2] + " " + splits[3] + "\n")
-            print(splits[0] + " " + splits[1] + " " + splits[2] + " " + splits[3] + "\n")
+        elif len(splits) >= 4:
+            print(splits[0] + " " + splits[1] + " " + splits[2] + " " + splits[3])
 
             if splits[1] not in dict:
                 p1 = Person(splits[1], None, None)
@@ -181,86 +171,138 @@ while x != 1:
         if splits[2] == "parent":
             child = dict.get(splits[3])
             parent = dict.get(splits[1])
+
             try:
                 if child.find_parent(parent) is True:
                     print("X " + parent.get_name() + " parent " + child.get_name())
                     print("Yes")
                 else:
                     print("X " + parent.get_name() + " parent " + child.get_name())
-                    print("No \n")
+                    print("No")
             except:
-                print("No \n")
+                print("X " + parent.get_name() + " parent " + child.get_name())
+                print("No")
 
         elif splits[2] == "sibling":
             sib1 = dict.get(splits[3])
             sib2 = dict.get(splits[1])
             try:
-
-                if dict.get(splits[1]).find_sibling(dict.get(splits[3])) is True:
+                if sib2.find_sibling(sib1) is True:
                     print("X " + sib2.get_name() + " sibling " + sib1.get_name())
                     print("Yes")
                 else:
                     print("X " + sib2.get_name() + " sibling " + sib1.get_name())
                     print("No")
             except:
-                print("No\n")
+                print("X " + sib2.get_name() + " sibling " + sib1.get_name())
+                print("No")
 
         elif splits[2] == "half-sibling":
             sib1 = dict.get(splits[3])
             sib2 = dict.get(splits[1])
             try:
                 if sib1.find_half(sib2) is True:
-                    print("X " + sib2.get_name() + " half-sibling " + sib1.get_name() + "\nYes")
+                    print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
+                    print("Yes")
                 else:
-                    print("X " + sib2.get_name() + " half-sibling " + sib1.get_name() + "\nNo")
+                    print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
+                    print("No")
             except:
-                print("No\n")
+                print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
+                print("No")
 
         elif splits[2] == "ancestor":
             person = dict.get(splits[3])
             anc = dict.get(splits[1])
             try:
                 if person.find_ancestor(anc) is True:
-                    print("X " + anc.get_name() + " ancestor " + person.get_name() + "\nYes")
+                    print("X " + anc.get_name() + " ancestor " + person.get_name())
+                    print("Yes")
                 else:
-                    print("X " + anc.get_name() + " ancestor " + person.get_name() + "\nNo")
+                    print("X " + anc.get_name() + " ancestor " + person.get_name())
+                    print("No")
             except:
+                print("X " + anc.get_name() + " ancestor " + person.get_name())
                 print("No")
 
         elif splits[2] == "cousin":
             cousin1 = dict.get(splits[3])
             cousin2 = dict.get(splits[1])
-
             try:
                 if cousin1.find_cousin(cousin2) is True:
-                    print("X " + cousin2.get_name() + " cousin " + cousin1.get_name() + "\nYes")
+                    print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
+                    print("Yes")
                 else:
-                    print("X " + cousin2.get_name() + " cousin " + cousin1.get_name() + "\nNo")
+                    print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
+                    print("No")
             except:
-                print("No\n")
-
+                print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
+                print("No")
 
         elif splits[2] == "unrelated":
             person1 = dict.get(splits[3])
             person2 = dict.get(splits[1])
             try:
                 if person1.find_related(person2) is True:
-                    print("X " + person2.get_name() + " unrelated " + person1.get_name() + "\nYes")
+                    print("X " + person2.get_name() + " unrelated " + person1.get_name())
+                    print("Yes")
                 else:
-                    print("X " + person2.get_name() + " unrelated " + person1.get_name() + "\nNo")
+                    print("X " + person2.get_name() + " unrelated " + person1.get_name() )
+                    print("No")
             except:
-                print("No\n")
+                print("X " + person2.get_name() + " unrelated " + person1.get_name())
+                print("No")
 
 
     elif splits[0] is "W":
         # WHO questions
         if splits[1] == "parent":
-            try:
-                child = dict.get(splits[2])
-                result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
-                print("W parent " + splits[2])
-                print(result + "\n")
-            except:
-                print("No parents - Root of Tree")
+            child = dict.get(splits[2])
+            result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
+            print("W parent " + splits[2])
+            print(result)
 
+        elif splits[1] == "sibling":
+            sib = dict.get(splits[2])
+            result = ""
+            for p in people:
+                if sib.find_sibling(p) is True:
+                    if p.get_name() != sib.get_name():
+                        result += p.get_name() + "\n"
+            print("W sibling " + splits[2])
+            print(result)
 
+        elif splits[1] == "half-sibling":
+            half = dict.get(splits[2])
+            for p in people:
+                if half.find_half(p) is not True:
+                    if half.get_name() != p.get_name():
+                        result += p.get_name() + "\n"
+            print("W half-sibling " + splits[2])
+            print(result)
+
+        elif splits[1] == "ancestor":
+            anc = dict.get(splits[2])
+            result = anc.ancestors()
+            print("W ancestor " + splits[2])
+            print(result)
+
+        elif splits[1] == "cousin":
+            cousin = dict.get(splits[2])
+            curr = False
+            for p in people:
+                curr = cousin.find_cousin(p)
+                if curr is True and cousin.get_name() != p.get_name():
+                    result += p.get_name() + "\n"
+            print("W cousin " + splits[2])
+            print(result)
+
+        elif splits[1] == "unrelated":
+            rel = dict.get(splits[2])
+            curr = False
+            for p in people:
+                curr = rel.find_related(p)
+                if curr is False and rel.get_name() != p.get_name():
+                    result += p.get_name() + "\n"
+            print("W unrelated " + splits[2])
+            print(result)
