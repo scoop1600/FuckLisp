@@ -184,7 +184,7 @@ while x != 1:
                     print("X " + parent.get_name() + " parent " + child.get_name())
                     print("No")
             except:
-                print("X " + parent.get_name() + " parent " + child.get_name())
+                print("X " + splits[1] + " parent " + splits[3])
                 print("No")
 
         elif splits[2] == "sibling":
@@ -198,7 +198,7 @@ while x != 1:
                     print("X " + sib2.get_name() + " sibling " + sib1.get_name())
                     print("No")
             except:
-                print("X " + sib2.get_name() + " sibling " + sib1.get_name())
+                print("X " + splits[1] + " sibling " + splits[3])
                 print("No")
 
         elif splits[2] == "half-sibling":
@@ -212,7 +212,7 @@ while x != 1:
                     print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
                     print("No")
             except:
-                print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
+                print("X " + splits[1] + " half-sibling " + splits[3])
                 print("No")
 
         elif splits[2] == "ancestor":
@@ -226,7 +226,7 @@ while x != 1:
                     print("X " + anc.get_name() + " ancestor " + person.get_name())
                     print("No")
             except:
-                print("X " + anc.get_name() + " ancestor " + person.get_name())
+                print("X " + splits[1] + " ancestor " + splits[2])
                 print("No")
 
         elif splits[2] == "cousin":
@@ -240,7 +240,7 @@ while x != 1:
                     print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
                     print("No")
             except:
-                print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
+                print("X " + splits[1] + " cousin " + splits[3])
                 print("No")
 
         elif splits[2] == "unrelated":
@@ -254,17 +254,20 @@ while x != 1:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name() )
                     print("No")
             except:
-                print("X " + person2.get_name() + " unrelated " + person1.get_name())
+                print("X " + splits[1] + " unrelated " + splits[3])
                 print("No")
 
 
     elif splits[0] is "W":
         # WHO questions
         if splits[1] == "parent":
-            child = dict.get(splits[2])
-            result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
-            print("W parent " + splits[2])
-            print(result)
+            try:
+                child = dict.get(splits[2])
+                result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
+                print("W parent " + splits[2])
+                print(result)
+            except:
+                print("W parent " + splits[2])
 
         elif splits[1] == "sibling":
             sib = dict.get(splits[2])
@@ -302,9 +305,12 @@ while x != 1:
             curr = False
             result = ""
             for p in people:
-                curr = cousin.find_cousin(p)
-                if curr is True and cousin.get_name() != p.get_name():
-                    result += p.get_name()
+                try:
+                    curr = cousin.find_cousin(p)
+                    if curr is True and cousin.get_name() != p.get_name():
+                        result += p.get_name()
+                except:
+                    result = ""
             print("W cousin " + splits[2])
             print(result)
 
@@ -312,9 +318,13 @@ while x != 1:
             rel = dict.get(splits[2])
             curr = False
             result = ""
-            for p in people:
-                curr = rel.find_related(p)
-                if curr is False and rel.get_name() != p.get_name():
+            if rel is None:
+                for p in people:
                     result += p.get_name() + "\n"
+            else:
+                for p in people:
+                    curr = rel.find_related(p)
+                    if curr is False and rel.get_name() != p.get_name():
+                        result += p.get_name() + "\n"
             print("W unrelated " + splits[2])
             print(result)
