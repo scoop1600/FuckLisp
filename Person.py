@@ -297,9 +297,12 @@ while x != 1:
 
         elif splits[1] == "ancestor":
             anc = dict.get(splits[2])
-            result = anc.ancestors()
-            print("W ancestor " + splits[2])
-            print(result)
+            try:
+                result = anc.ancestors()
+                print("W ancestor " + splits[2])
+                print(result)
+            except:
+                print("W ancestor " + splits[2])
 
         elif splits[1] == "cousin":
             cousin = dict.get(splits[2])
