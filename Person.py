@@ -1,6 +1,6 @@
 import sys
+
 class Person:
-    name = ""
 
     def __init__(self, name, parent1, parent2):
         self.name = name
@@ -107,7 +107,7 @@ class Person:
         elif self.get_name() in b:
             direct = True
 
-        if direct is True | common is True | (direct is True & common is True):
+        if common is True or direct is True or (common is True and direct is True):
             result = True
         return result
 
@@ -249,10 +249,10 @@ while x != 1:
             try:
                 if person1.find_related(person2) is True:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name())
-                    print("Yes")
+                    print("No")
                 else:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name() )
-                    print("No")
+                    print("Yes")
             except:
                 print("X " + splits[1] + " unrelated " + splits[3])
                 print("No")
