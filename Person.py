@@ -287,7 +287,7 @@ while x != 1:
             result = ""
             for p in people:
                 try:
-                    if half.find_half(p) is not True:
+                    if half.find_half(p) is True:
                         if half.get_name() != p.get_name():
                             result += p.get_name() + "\n"
                 except:
