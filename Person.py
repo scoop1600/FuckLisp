@@ -40,7 +40,7 @@ class Person:
 
     def find_half(self, p):
         rents = [self.get_parent1().get_name(), self.get_parent2().get_name()]
-        if p.get_parent1().get_name() in rents or p.get_parent2().get_name() in rents:
+        if bool(p.get_parent1().get_name() in rents) != bool(p.get_parent2().get_name() in rents):
             return True
         elif self.find_sibling(p):
             return False
