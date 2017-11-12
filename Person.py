@@ -110,6 +110,14 @@ class Person:
         if common is True or direct is True or (common is True and direct is True):
             result = True
         return result
+def alph(x):
+    result = ""
+    words = x.split()
+    words.sort()
+    for p in words:
+        result += p + "\n"
+
+    return result
 
 
 x = 0
@@ -265,7 +273,7 @@ while x != 1:
                 child = dict.get(splits[2])
                 result = child.get_parent1().get_name() + "\n" + child.get_parent2().get_name()
                 print("W parent " + splits[2])
-                print(result)
+                print(alph(result))
             except:
                 print("W parent " + splits[2])
 
@@ -280,7 +288,7 @@ while x != 1:
                 except:
                     result = result
             print("W sibling " + splits[2])
-            print(result)
+            print(alph(result))
 
         elif splits[1] == "half-sibling":
             half = dict.get(splits[2])
@@ -293,14 +301,14 @@ while x != 1:
                 except:
                     result = result
             print("W half-sibling " + splits[2])
-            print(result)
+            print(alph(result))
 
         elif splits[1] == "ancestor":
             anc = dict.get(splits[2])
             try:
                 result = anc.ancestors()
                 print("W ancestor " + splits[2])
-                print(result)
+                print(alph(result))
             except:
                 print("W ancestor " + splits[2])
 
@@ -316,7 +324,7 @@ while x != 1:
                 except:
                     result = ""
             print("W cousin " + splits[2])
-            print(result)
+            print(alph(result))
 
         elif splits[1] == "unrelated":
             rel = dict.get(splits[2])
@@ -331,4 +339,4 @@ while x != 1:
                     if curr is False and rel.get_name() != p.get_name():
                         result += p.get_name() + "\n"
             print("W unrelated " + splits[2])
-            print(result)
+            print(alph(result))
