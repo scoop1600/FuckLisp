@@ -247,12 +247,12 @@ while x != 1:
             person1 = dict.get(splits[3])
             person2 = dict.get(splits[1])
             try:
-                if person1.find_related(person2) is True:
+                if person1.find_related(person2) is False:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name())
-                    print("No")
+                    print("Yes")
                 else:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name() )
-                    print("Yes")
+                    print("No")
             except:
                 print("X " + splits[1] + " unrelated " + splits[3])
                 print("No")
