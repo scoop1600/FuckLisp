@@ -125,8 +125,8 @@ dict = {}
 splits = []
 people = []
 
-while x != 1:
-    data = sys.stdin.readline()
+for line in sys.stdin:
+    data = line.rstrip()
     splits = data.split(" ")
     # splits[0] - query, splits[1] - parent1, splits[2] - parent2, (splits[3] - child)
     for i in range(len(splits)):
