@@ -314,7 +314,7 @@ for line in sys.stdin:
                 total = anc.ancestors().split()
                 for element in total:
                     if element not in result:
-                        result += element
+                        result += element + "\n"
                 print("W ancestor " + splits[2])
                 print(alph(result))
             except:
