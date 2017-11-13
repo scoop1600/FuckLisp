@@ -268,7 +268,7 @@ for line in sys.stdin:
                     print("No\n")
             except:
                 print("X " + splits[1] + " unrelated " + splits[3])
-                print("No\n")
+                print("Yes\n")
 
 
     elif splits[0] is "W":
