@@ -98,18 +98,23 @@ class Person:
         a = self.ancestors()
         b = other.ancestors()
 
-        for name in a:
-            if name in b:
+        first_anc = a.split()
+        second_anc = b.split()
+
+        for name in first_anc:
+            if name in second_anc:
                 common = True
 
-        if other.get_name() in a:
+        if other.get_name() in first_anc:
             direct = True
-        elif self.get_name() in b:
+        elif self.get_name() in second_anc:
             direct = True
 
         if common is True or direct is True or (common is True and direct is True):
             result = True
         return result
+
+
 def alph(x):
     result = ""
     words = x.split()
