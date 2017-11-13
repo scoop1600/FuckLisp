@@ -311,7 +311,10 @@ for line in sys.stdin:
         elif splits[1] == "ancestor":
             anc = dict.get(splits[2])
             try:
-                result = anc.ancestors()
+                total = anc.ancestors().split()
+                for element in total:
+                    if element not in result:
+                        result += element
                 print("W ancestor " + splits[2])
                 print(alph(result))
             except:
