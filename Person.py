@@ -192,13 +192,13 @@ for line in sys.stdin:
             try:
                 if child.find_parent(parent) is True:
                     print("X " + parent.get_name() + " parent " + child.get_name())
-                    print("Yes")
+                    print("Yes\n")
                 else:
                     print("X " + parent.get_name() + " parent " + child.get_name())
-                    print("No")
+                    print("No\n")
             except:
                 print("X " + splits[1] + " parent " + splits[3])
-                print("No")
+                print("No\n")
 
         elif splits[2] == "sibling":
             sib1 = dict.get(splits[3])
@@ -206,13 +206,13 @@ for line in sys.stdin:
             try:
                 if sib2.find_sibling(sib1) is True:
                     print("X " + sib2.get_name() + " sibling " + sib1.get_name())
-                    print("Yes")
+                    print("Yes\n")
                 else:
                     print("X " + sib2.get_name() + " sibling " + sib1.get_name())
-                    print("No")
+                    print("No\n")
             except:
                 print("X " + splits[1] + " sibling " + splits[3])
-                print("No")
+                print("No\n")
 
         elif splits[2] == "half-sibling":
             sib1 = dict.get(splits[3])
@@ -220,13 +220,13 @@ for line in sys.stdin:
             try:
                 if sib1.find_half(sib2) is True:
                     print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
-                    print("Yes")
+                    print("Yes\n")
                 else:
                     print("X " + sib2.get_name() + " half-sibling " + sib1.get_name())
-                    print("No")
+                    print("No\n")
             except:
                 print("X " + splits[1] + " half-sibling " + splits[3])
-                print("No")
+                print("No\n")
 
         elif splits[2] == "ancestor":
             person = dict.get(splits[3])
@@ -234,13 +234,13 @@ for line in sys.stdin:
             try:
                 if person.find_ancestor(anc) is True:
                     print("X " + anc.get_name() + " ancestor " + person.get_name())
-                    print("Yes")
+                    print("Yes\n")
                 else:
                     print("X " + anc.get_name() + " ancestor " + person.get_name())
-                    print("No")
+                    print("No\n")
             except:
                 print("X " + splits[1] + " ancestor " + splits[2])
-                print("No")
+                print("No\n")
 
         elif splits[2] == "cousin":
             cousin1 = dict.get(splits[3])
@@ -248,13 +248,13 @@ for line in sys.stdin:
             try:
                 if cousin1.find_cousin(cousin2) is True:
                     print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
-                    print("Yes")
+                    print("Yes\n")
                 else:
                     print("X " + cousin2.get_name() + " cousin " + cousin1.get_name())
-                    print("No")
+                    print("No\n")
             except:
                 print("X " + splits[1] + " cousin " + splits[3])
-                print("No")
+                print("No\n")
 
         elif splits[2] == "unrelated":
             person1 = dict.get(splits[3])
@@ -262,13 +262,13 @@ for line in sys.stdin:
             try:
                 if person1.find_related(person2) is False:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name())
-                    print("Yes")
+                    print("Yes\n")
                 else:
                     print("X " + person2.get_name() + " unrelated " + person1.get_name() )
-                    print("No")
+                    print("No\n")
             except:
                 print("X " + splits[1] + " unrelated " + splits[3])
-                print("No")
+                print("No\n")
 
 
     elif splits[0] is "W":
@@ -325,7 +325,7 @@ for line in sys.stdin:
                 try:
                     curr = cousin.find_cousin(p)
                     if curr is True and cousin.get_name() != p.get_name():
-                        result += p.get_name()
+                        result += p.get_name() + "\n"
                 except:
                     result = ""
             print("W cousin " + splits[2])
