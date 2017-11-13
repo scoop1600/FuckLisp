@@ -62,7 +62,7 @@ class Person:
         return fam
 
     def find_ancestor(self, ancestor):
-        ancs = self.ancestors()
+        ancs = self.ancestors().split()
         if ancestor.get_name() in ancs:
             return True
         else:
@@ -239,7 +239,7 @@ for line in sys.stdin:
                     print("X " + anc.get_name() + " ancestor " + person.get_name())
                     print("No\n")
             except:
-                print("X " + splits[1] + " ancestor " + splits[2])
+                print("X " + splits[1] + " ancestor " + splits[3])
                 print("No\n")
 
         elif splits[2] == "cousin":
@@ -311,10 +311,7 @@ for line in sys.stdin:
         elif splits[1] == "ancestor":
             anc = dict.get(splits[2])
             try:
-                total = anc.ancestors().split()
-                for element in total:
-                    if element not in result:
-                        result += element + "\n"
+                result = anc.ancestors()
                 print("W ancestor " + splits[2])
                 print(alph(result))
             except:
