@@ -73,8 +73,8 @@ class Person:
         direct = False
         result = False
 
-        a = self.ancestors()
-        b = other.ancestors()
+        a = self.ancestors().split()
+        b = other.ancestors().split()
 
         for name in a:
             if name in b:
