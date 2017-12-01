@@ -345,3 +345,4 @@ for line in sys.stdin:
                         result += p.get_name() + "\n"
             print("W unrelated " + splits[2])
             print(alph(result))
+            hi
